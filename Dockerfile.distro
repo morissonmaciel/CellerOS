@@ -1,0 +1,39 @@
+## |
+## | OSTREE
+## |
+
+# Customize your system here
+FROM localhost/ostree/base:latest AS host
+
+# Install base distro pacakges
+RUN pacman --noconfirm --sync \
+    gdm \
+    gnome \
+    \
+    bluez \
+    bluez-utils \
+    bluez-tootls \
+    \
+    git \
+    nano \
+    bash-completion \
+    \
+    power-profiles-daemon \
+    \
+    noto-fonts noto-fonts-cjk noto-fonts-emoji \
+    \
+    mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver libva-utils \
+    \
+    steam gamescope lib32-mangohud mangohud \
+    \
+    firefox ffmpeg \
+    \
+    gnome-tweaks
+
+RUN pacman --noconfirm -Rc epiphany
+
+RUN useradd -m gamer -p gamer
+
+RUN systemctl enable gdm.service
+RUN systemctl enable bluetooth.service
+RUN systemctl enable NetworkManager
