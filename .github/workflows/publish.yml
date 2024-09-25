@@ -18,8 +18,8 @@ jobs:
       - name: Set up Podman
         uses: redhat-actions/podman-login@v1
         with:
-          username: ${{ secrets.GITHUB_ACTOR }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
           registry: ghcr.io
 
       # Construir a imagem com Podman
