@@ -25,9 +25,9 @@ jobs:
       # Construir a imagem com Podman
       - name: Build Docker image
         run: |
-          podman build -f BaseImage -t ghcr.io/${{ github.repository }}/niteos:latest .
+          podman build -f BaseImage -t ghcr.io/${{ github.repository }}/celleros:latest .
 
       # Fazer o push da imagem para o GitHub Container Registry
       - name: Push Docker image
         run: |
-          podman push ghcr.io/${{ github.repository }}/niteos:latest
+          podman push ghcr.io/${{ github.repository }}/celleros:latest
