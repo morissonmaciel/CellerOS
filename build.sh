@@ -1,0 +1,1 @@
+podman build -f BaseImage --tag=niteos

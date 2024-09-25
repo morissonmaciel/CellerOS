@@ -1,0 +1,33 @@
+name: Build and Push Image
+
+on:
+  push:
+    branches:
+      - main  # O workflow será acionado quando houver push na branch main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Configurar o Podman
+      - name: Set up Podman
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ secrets.GITHUB_ACTOR }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+
+      # Construir a imagem com Podman
+      - name: Build Docker image
+        run: |
+          podman build -f BaseImage -t ghcr.io/${{ github.repository }}/niteos:latest .
+
+      # Fazer o push da imagem para o GitHub Container Registry
+      - name: Push Docker image
+        run: |
+          podman push ghcr.io/${{ github.repository }}/niteos:latest
