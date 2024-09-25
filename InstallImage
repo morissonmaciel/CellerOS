@@ -1,9 +1,0 @@
-# |
-# | ROOTFS
-# |
-
-# Build a clean system in /mnt to avoid missing files from NoExtract option in upstream
-FROM localhost/niteos:latest AS rootfs
-
-RUN pacstrap -K -P /mnt base \
-    && cp -av /etc/pacman.d/ /mnt/etc/
