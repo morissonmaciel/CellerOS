@@ -9,15 +9,8 @@ if ! command -v podman &> /dev/null; then
 fi
 
 # Delete existing image with the same tag if it exists
-if podman images | grep -q 'ghcr.io/morissonmaciel/gamer-archos'; then
-    podman rmi ghcr.io/morissonmaciel/gamer-archos:latest
+if podman images | grep -q 'ghcr.io/morissonmaciel/usblue-celleros'; then
+    podman rmi ghcr.io/morissonmaciel/usblue-celleros:latest
 fi
 
-podman build -f Dockerfile -t ghcr.io/morissonmaciel/gamer-archos:latest .
-
-# Delete existing image with the same tag if it exists for Gnome.dockerfile
-if podman images | grep -q 'ghcr.io/morissonmaciel/gnome-gamer-archos'; then
-    podman rmi ghcr.io/morissonmaciel/gnome-gamer-archos:latest
-fi
-
-podman build -f Gnome.dockerfile -t ghcr.io/morissonmaciel/gnome-gamer-archos:latest .
+podman build -f Containerfile.base -t ghcr.io/morissonmaciel/gamer-archos:latest .
