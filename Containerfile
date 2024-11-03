@@ -88,6 +88,10 @@ RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share
 # Copy system default files to root filesystem
 COPY rootfs/etc /etc
 
+# Set random hostname for the machine
+RUN echo "CELLEROS-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
+    ostree container commit
+
 # Cleanup & Finalize
 RUN mkdir -p "/etc/xdg/autostart" && \
     mv "/usr/share/applications/steam.desktop" "/etc/xdg/autostart/steam.desktop" && \
