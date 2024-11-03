@@ -13,4 +13,4 @@ if podman images | grep -q 'ghcr.io/morissonmaciel/usblue-celleros'; then
     podman rmi ghcr.io/morissonmaciel/usblue-celleros:latest
 fi
 
-podman build -f Containerfile.base -t ghcr.io/morissonmaciel/gamer-archos:latest .
+podman build -f Containerfile -t ghcr.io/morissonmaciel/usblue-celleros:latest .

@@ -17,6 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Check just syntax
+        uses: ublue-os/just-action@v2
+
+      - name: Maximize build space
+        uses: ublue-os/remove-unwanted-software@v7
+
       # Configurar o Podman
       - name: Set up Podman
         uses: redhat-actions/podman-login@v1
