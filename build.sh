@@ -3,6 +3,8 @@
 set -o errexit # Exit on non-zero status
 set -o nounset # Error on unset variables
 
+clear && clear
+
 # Assuring system has podman installed
 if ! command -v podman &> /dev/null; then
     pacman --noconfirm --sync --needed podman

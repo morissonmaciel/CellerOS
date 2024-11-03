@@ -28,11 +28,6 @@ RUN rpm-ostree install \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
-RUN gsettings set org.gnome.desktop.interface font-name 'Inter Regular 11' && \
-    gsettings set org.gnome.desktop.interface document-font-name 'Inter Regular 11' && \
-    gsettings set org.gnome.desktop.interface text-scaling-factor 0.96 && \
-    ostree container commit
-
 # Installing and configuring minimal default GNOME Shell extensions
 RUN rpm-ostree install \
     gnome-shell-extension-appindicator \
@@ -62,16 +57,34 @@ RUN rpm-ostree install \
 RUN rpm-ostree install \
     yaru-icon-theme \
     yaru-sound-theme && \
-    gsettings set org.gnome.desktop.interface icon-theme 'Yaru' && \
-    gsettings set org.gnome.desktop.interface cursor-theme 'Yaru' && \
-    gsettings set org.gnome.desktop.sound theme-name 'Yaru' && \
     /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
+# Apply Gnome dconf settings to all users
+RUN mkdir -p /etc/dconf/db/local.d && \
+    echo "[org/gnome/desktop/interface]" > /etc/dconf/db/local.d/00-interface && \
+    echo "icon-theme='Yaru'" >> /etc/dconf/db/local.d/00-interface && \
+    echo "cursor-theme='Yaru'" >> /etc/dconf/db/local.d/00-interface && \
+    echo "[org/gnome/desktop/sound]" > /etc/dconf/db/local.d/00-sound && \
+    echo "theme-name='Yaru'" >> /etc/dconf/db/local.d/00-sound && \
+    ostree container commit
+
+RUN mkdir -p /etc/dconf/db/local.d && \
+    echo "[org/gnome/desktop/interface]" > /etc/dconf/db/local.d/01-fonts && \
+    echo "font-name='Inter Regular 11'" >> /etc/dconf/db/local.d/01-fonts && \
+    echo "document-font-name='Inter Regular 11'" >> /etc/dconf/db/local.d/01-fonts && \
+    echo "text-scaling-factor=0.96" >> /etc/dconf/db/local.d/01-fonts && \
     ostree container commit
 
 # Apply some Steam tweaks
 RUN rm -f /etc/environment && \
     echo "STEAM_FORCE_DESKTOPUI_SCALING=2" >> /etc/environment && \
     /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
+RUN [ -f /etc/skel/.local/share/Steam/steam_dev.cfg ] && rm /etc/skel/.local/share/Steam/steam_dev.cfg || true && \
+    mkdir -p /etc/skel/.local/share/Steam && \
+    echo -e "@nClientDownloadEnableHTTP2PlatformLinux 0\n@fDownloadRateImprovementToAddAnotherConnection 1.0\n@cMaxInitialDownloadSources 15" >> /etc/skel/.local/share/Steam/steam_dev.cfg && \
     ostree container commit
 
 RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share/applications/steam.desktop && \
