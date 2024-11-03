@@ -17,6 +17,15 @@ RUN rpm-ostree install \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
+# Installing python3 and some useful packages 
+RUN rpm-ostree install \
+    python-vdf \
+    python3-pip \
+    python-crcmod \
+    python3-icoextract && \
+    /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
 RUN rpm-ostree install \
     gamescope && \
     /usr/libexec/containerbuild/cleanup.sh && \
@@ -87,6 +96,7 @@ RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share
 
 # Copy system default files to root filesystem
 COPY rootfs/etc /etc
+COPY rootfs/usr /usr
 
 # Set random hostname for the machine
 RUN echo "CELLEROS-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
