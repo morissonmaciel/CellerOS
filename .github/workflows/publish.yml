@@ -28,7 +28,7 @@ jobs:
       # Construir a imagem com Podman
       - name: Build Docker image
         run: |
-          podman build -f Dockerfile -t ghcr.io/${{ github.repository_owner }}/celleros:latest .
+          podman build -f Containerfile -t ghcr.io/${{ github.repository_owner }}/celleros:latest .
 
       # Fazer o push da imagem para o GitHub Container Registry
       - name: Push Docker image

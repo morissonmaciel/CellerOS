@@ -1,11 +1,9 @@
 FROM ghcr.io/ublue-os/silverblue-main:41 AS base
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    rpm-ostree override remove ublue-os-update-services && \
+RUN rpm-ostree override remove ublue-os-update-services && \
     ostree container commit
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    rpm-ostree install \
+RUN rpm-ostree install \
         pulseaudio-utils \
         mesa-vulkan-drivers \
         mangohud \
@@ -13,19 +11,16 @@ RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
         steam && \
     ostree container commit
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    rpm-ostree install gamescope && \
+RUN rpm-ostree install gamescope && \
     ostree container commit
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    rpm-ostree install \
+RUN rpm-ostree install \
         gnome-shell-extension-appindicator \
         gnome-shell-extension-dash-to-dock \
         gnome-shell-extension-blur-my-shell && \
     ostree container commit
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    rpm-ostree override remove \
+RUN rpm-ostree override remove \
         gnome-classic-session \
         gnome-tour \
         gnome-shell-extension-background-logo \
