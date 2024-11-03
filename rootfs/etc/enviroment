@@ -1,0 +1,5 @@
+# VIM is more usable on deck due to control scheme
+EDITOR=nano
+
+# Fix Steam extraneous scaling on desktop
+STEAM_FORCE_DESKTOPUI_SCALING=2

@@ -77,11 +77,6 @@ RUN mkdir -p /etc/dconf/db/local.d && \
     ostree container commit
 
 # Apply some Steam tweaks
-RUN rm -f /etc/environment && \
-    echo "STEAM_FORCE_DESKTOPUI_SCALING=2" >> /etc/environment && \
-    /usr/libexec/containerbuild/cleanup.sh && \
-    ostree container commit
-
 RUN [ -f /etc/skel/.local/share/Steam/steam_dev.cfg ] && rm /etc/skel/.local/share/Steam/steam_dev.cfg || true && \
     mkdir -p /etc/skel/.local/share/Steam && \
     echo -e "@nClientDownloadEnableHTTP2PlatformLinux 0\n@fDownloadRateImprovementToAddAnotherConnection 1.0\n@cMaxInitialDownloadSources 15" >> /etc/skel/.local/share/Steam/steam_dev.cfg && \
@@ -89,6 +84,9 @@ RUN [ -f /etc/skel/.local/share/Steam/steam_dev.cfg ] && rm /etc/skel/.local/sha
 
 RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share/applications/steam.desktop && \
     ostree container commit
+
+# Copy system default files to root filesystem
+COPY rootfs/etc /etc
 
 # Cleanup & Finalize
 RUN mkdir -p "/etc/xdg/autostart" && \
