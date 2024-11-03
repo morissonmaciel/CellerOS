@@ -1,0 +1,2 @@
+# Prevent Logitech USB receivers from wakeup system from suspension
+ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="046d", ATTR{power/wakeup}="disabled"
