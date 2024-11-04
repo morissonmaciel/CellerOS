@@ -62,6 +62,17 @@ RUN rpm-ostree install \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
+# Homebrew
+RUN touch /.dockerenv && \
+    mkdir -p /var/home && \
+    mkdir -p /var/roothome && \
+    curl -Lo /tmp/brew-install https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh && \
+    chmod +x /tmp/brew-install && \
+    /tmp/brew-install && \
+    tar --zstd -cvf /usr/share/homebrew.tar.zst /home/linuxbrew/.linuxbrew && \
+    /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
 # Setting Yaru as default icon and sound theme
 RUN rpm-ostree install \
     yaru-icon-theme \
@@ -97,6 +108,24 @@ RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share
 # Copy system default files to root filesystem
 COPY rootfs/etc /etc
 COPY rootfs/usr /usr
+
+RUN chmod +x /usr/share/gamescope-session-plus/gamescope-session-plus && \
+    chmod +x /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
+    chmod +x /usr/share/wayland-sessions/gamescope-session.desktop && \
+    chmod +x /usr/bin/steamos-polkit-helpers/jupiter-biosupdate && \
+    chmod +x /usr/bin/steamos-polkit-helpers/steamos-select-branch && \
+    chmod +x /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
+    chmod +x /usr/bin/steamos-polkit-helpers/steamos-set-timezone && \
+    chmod +x /usr/bin/steamos-polkit-helpers/steamos-update && \
+    chmod +x /usr/bin/export-gpu && \
+    chmod +x /usr/bin/gamescope-session-plus && \
+    chmod +x /usr/bin/jupiter-biosupdate && \
+    chmod +x /usr/bin/steam-http-loader && \
+    chmod +x /usr/bin/steamos-select-branch && \
+    chmod +x /usr/bin/steamos-session-select && \
+    chmod +x /usr/bin/steamos-update && \
+    chmod +x /usr/libexec/os-branch-select
+
 
 # Set random hostname for the machine
 RUN echo "DESKTOP-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
