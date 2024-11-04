@@ -17,7 +17,7 @@ RUN rpm-ostree install \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
-# Installing python3 and some useful packages 
+# Installing python3 and some useful packages
 RUN rpm-ostree install \
     python-vdf \
     python3-pip \
@@ -109,22 +109,22 @@ RUN sed -i 's@PrefersNonDefaultGPU=true@PrefersNonDefaultGPU=false@g' /usr/share
 COPY rootfs/etc /etc
 COPY rootfs/usr /usr
 
-RUN chmod +x /usr/share/gamescope-session-plus/gamescope-session-plus && \
-    chmod +x /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
-    chmod +x /usr/share/wayland-sessions/gamescope-session.desktop && \
-    chmod +x /usr/bin/steamos-polkit-helpers/jupiter-biosupdate && \
-    chmod +x /usr/bin/steamos-polkit-helpers/steamos-select-branch && \
-    chmod +x /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
-    chmod +x /usr/bin/steamos-polkit-helpers/steamos-set-timezone && \
-    chmod +x /usr/bin/steamos-polkit-helpers/steamos-update && \
-    chmod +x /usr/bin/export-gpu && \
-    chmod +x /usr/bin/gamescope-session-plus && \
-    chmod +x /usr/bin/jupiter-biosupdate && \
-    chmod +x /usr/bin/steam-http-loader && \
-    chmod +x /usr/bin/steamos-select-branch && \
-    chmod +x /usr/bin/steamos-session-select && \
-    chmod +x /usr/bin/steamos-update && \
-    chmod +x /usr/libexec/os-branch-select
+RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
+    chmod 755 /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
+    chmod 755 /usr/share/wayland-sessions/gamescope-session.desktop && \
+    chmod 755 /usr/bin/steamos-polkit-helpers/jupiter-biosupdate && \
+    chmod 755 /usr/bin/steamos-polkit-helpers/steamos-select-branch && \
+    chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
+    chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-timezone && \
+    chmod 755 /usr/bin/steamos-polkit-helpers/steamos-update && \
+    chmod 755 /usr/bin/export-gpu && \
+    chmod 755 /usr/bin/gamescope-session-plus && \
+    chmod 755 /usr/bin/jupiter-biosupdate && \
+    chmod 755 /usr/bin/steam-http-loader && \
+    chmod 755 /usr/bin/steamos-select-branch && \
+    chmod 755 /usr/bin/steamos-session-select && \
+    chmod 755 /usr/bin/steamos-update && \
+    chmod 755 /usr/libexec/os-branch-select
 
 
 # Set random hostname for the machine
