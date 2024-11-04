@@ -99,7 +99,10 @@ COPY rootfs/etc /etc
 COPY rootfs/usr /usr
 
 # Set random hostname for the machine
-RUN echo "CELLEROS-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
+RUN echo "DESKTOP-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
+    ostree container commit
+
+RUN systemctl enable dconf-update.service && \
     ostree container commit
 
 # Cleanup & Finalize
