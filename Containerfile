@@ -8,7 +8,7 @@ RUN rpm-ostree override remove \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
-RUN rpm-ostree override install \
+RUN rpm-ostree install \
     fwupd \
     fwupd-plugin-flashrom \
     fwupd-plugin-modem-manager \
