@@ -8,6 +8,14 @@ RUN rpm-ostree override remove \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
+RUN rpm-ostree override install \
+    fwupd \
+    fwupd-plugin-flashrom \
+    fwupd-plugin-modem-manager \
+    fwupd-plugin-uefi-capsule-data && \
+    /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
 RUN rpm-ostree install \
     pulseaudio-utils \
     mesa-vulkan-drivers \

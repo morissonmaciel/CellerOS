@@ -15,4 +15,4 @@ ACTION=="add", SUBSYSTEM=="hwmon", DEVPATH=="*/hwmon0", RUN+="/usr/bin/chmod a+w
 
 # Enables power button handling
 # - isa0060/serio0/input0
-SUBSYSTEM=="input", ATTRS{phys}=="isa0060/serio0/input0", MODE="0660", TAG+="uaccess"
+# sSUBSYSTEM=="input", ATTRS{phys}=="isa0060/serio0/input0", MODE="0660", TAG+="uaccess"
