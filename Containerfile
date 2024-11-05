@@ -82,6 +82,13 @@ RUN touch /.dockerenv && \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
+# Fixing tty console font size
+RUN rpm-ostree install \
+    terminus-fonts-console && \
+    sed -i 's/^FONT=.*/FONT="ter-m32n"/' /etc/vconsole.conf && \
+    /usr/libexec/containerbuild/cleanup.sh && \
+    ostree container commit
+
 # Setting Yaru as default icon and sound theme
 RUN rpm-ostree install \
     yaru-icon-theme \
@@ -134,7 +141,6 @@ RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
     chmod 755 /usr/bin/steamos-update && \
     chmod 755 /usr/libexec/os-branch-select && \
     ostree container commit
-
 
 # Set random hostname for the machine
 RUN echo "DESKTOP-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostname && \
