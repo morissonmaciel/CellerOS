@@ -110,8 +110,8 @@ COPY rootfs/etc /etc
 COPY rootfs/usr /usr
 
 RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
-    chmod 755 /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
-    chmod 755 /usr/share/wayland-sessions/gamescope-session.desktop && \
+    chmod 644 /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
+    chmod 644 /usr/share/wayland-sessions/gamescope-session.desktop && \
     chmod 755 /usr/bin/steamos-polkit-helpers/jupiter-biosupdate && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-select-branch && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
@@ -124,7 +124,8 @@ RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
     chmod 755 /usr/bin/steamos-select-branch && \
     chmod 755 /usr/bin/steamos-session-select && \
     chmod 755 /usr/bin/steamos-update && \
-    chmod 755 /usr/libexec/os-branch-select
+    chmod 755 /usr/libexec/os-branch-select && \
+    ostree container commit
 
 
 # Set random hostname for the machine
