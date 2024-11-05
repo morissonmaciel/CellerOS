@@ -85,7 +85,6 @@ RUN touch /.dockerenv && \
 # Fixing tty console font size
 RUN rpm-ostree install \
     terminus-fonts-console && \
-    sed -i 's/^FONT=.*/FONT="ter-m32n"/' /etc/vconsole.conf && \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
@@ -132,6 +131,7 @@ RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-timezone && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-update && \
+    chmod 755 /usr/bin/cec-control && \
     chmod 755 /usr/bin/export-gpu && \
     chmod 755 /usr/bin/gamescope-session-plus && \
     chmod 755 /usr/bin/jupiter-biosupdate && \
@@ -140,6 +140,10 @@ RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
     chmod 755 /usr/bin/steamos-session-select && \
     chmod 755 /usr/bin/steamos-update && \
     chmod 755 /usr/libexec/os-branch-select && \
+    chmod 644 /usr/lib/systemd/system/dconf-update.service && \
+    chmod 644 /usr/lib/systemd/system/cec-onboot.service && \
+    chmod 644 /usr/lib/systemd/system/cec-onpoweroff.service && \
+    chmod 644 /usr/lib/systemd/system/cec-onsleep.service && \
     ostree container commit
 
 # Set random hostname for the machine
