@@ -17,6 +17,7 @@ RUN rpm-ostree install \
     ostree container commit
 
 RUN rpm-ostree install \
+    libcec \
     pulseaudio-utils \
     mesa-vulkan-drivers \
     mangohud \
@@ -140,6 +141,9 @@ RUN echo "DESKTOP-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostnam
     ostree container commit
 
 RUN systemctl enable dconf-update.service && \
+    systemctl enable cec-onboot.service && \
+    systemctl enable cec-onpoweroff.service && \
+    systemctl enable cec-onsleep.service && \
     ostree container commit
 
 RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
