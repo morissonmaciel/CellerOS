@@ -140,7 +140,7 @@ RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 
 # Cleanup & Finalize
 RUN mkdir -p "/etc/xdg/autostart" && \
-    mv "/usr/share/applications/steam.desktop" "/etc/xdg/autostart/steam.desktop" && \
+    ln -s "/usr/share/applications/steam.desktop" "/etc/xdg/autostart/steam.desktop" && \
     [ -f /usr/share/applications/nvtop.desktop ] && sed -i 's@\[Desktop Entry\]@\[Desktop Entry\]\nNoDisplay=true@g' /usr/share/applications/nvtop.desktop || true && \
     [ -f /usr/share/applications/btop.desktop ] && sed -i 's@\[Desktop Entry\]@\[Desktop Entry\]\nNoDisplay=true@g' /usr/share/applications/btop.desktop || true && \
     ostree container commit
