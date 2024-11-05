@@ -134,6 +134,9 @@ RUN echo "DESKTOP-$(cat /dev/urandom | tr -dc 'A-Z' | head -c 4)" > /etc/hostnam
 RUN systemctl enable dconf-update.service && \
     ostree container commit
 
+RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    ostree container commit
+
 # Cleanup & Finalize
 RUN mkdir -p "/etc/xdg/autostart" && \
     mv "/usr/share/applications/steam.desktop" "/etc/xdg/autostart/steam.desktop" && \

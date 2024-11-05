@@ -6,7 +6,7 @@ _install_decky_loader() {
 }
 
 _post_install_helper() {
-    sudo usermod -aG wheel $(whoami)
+    sudo usermod -a -G wheel $USER
     sudo sed -i "s/^User=.*/User=$(whoami)/" /etc/sddm.conf.d/steamos.conf
     sudo systemctl disable gdm
     sudo systemctl enable sddm
