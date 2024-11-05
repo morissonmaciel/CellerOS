@@ -111,7 +111,6 @@ COPY rootfs/usr /usr
 
 RUN chmod 755 /usr/share/gamescope-session-plus/gamescope-session-plus && \
     chmod 644 /usr/share/wayland-sessions/gamescope-session-steam.desktop && \
-    chmod 644 /usr/share/wayland-sessions/gamescope-session.desktop && \
     chmod 755 /usr/bin/steamos-polkit-helpers/jupiter-biosupdate && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-select-branch && \
     chmod 755 /usr/bin/steamos-polkit-helpers/steamos-set-hostname && \
