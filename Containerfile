@@ -85,7 +85,6 @@ RUN touch /.dockerenv && \
 # Fixing tty console font size
 RUN rpm-ostree install \
     terminus-fonts-console && \
-    setfont ter-m32n && \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
