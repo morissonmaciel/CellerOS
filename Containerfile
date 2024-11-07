@@ -1,4 +1,4 @@
-FROM ghcr.io/ublue-os/silverblue-main:41 AS base
+FROM ghcr.io/ublue-os/silverblue-main:40 AS base
 
 COPY rootfs/usr/libexec/containerbuild/cleanup.sh /usr/libexec/containerbuild/cleanup.sh
 
