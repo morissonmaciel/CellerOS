@@ -60,8 +60,7 @@ RUN rpm-ostree install \
 RUN rpm-ostree override remove \
     gnome-classic-session \
     gnome-tour \
-    gnome-shell-extension-background-logo \
-    gnome-shell-extension-apps-menu && \
+    gnome-shell-extension-background-logo && \
     /usr/libexec/containerbuild/cleanup.sh && \
     ostree container commit
 
